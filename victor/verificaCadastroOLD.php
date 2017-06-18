@@ -30,7 +30,7 @@ if (empty($tipo)||empty($rSocial)||empty($cnpj)||empty($nomeE)||empty($emailE)||
 }else{
 
 
-mysqli_query($conexao,"insert into cad_empresa (TIPO,R_SOCIAL,CNPJ,ENDERECO,BAIRRO,CIDADE,ESTADO,CEP,FONE,RESP_LEGAL,EMAIL_RESP_LEGAL) value ('$tipo','$rSocial','$cnpj','$enderecoE','$bairroE','$cidadeE','$estadoE','$cepE','$foneE','$nomeE','$emailE')"); 
+mysqli_query($conexao,"insert into cad_empresa (TIPO,R_SOCIAL,CNPJ,ENDERECO,BAIRRO,CIDADE,ESTADO,CEP,FONE,RESP_LEGAL,EMAIL_RESP_LEGAL) value ('$tipo','$rSocial','$cnpj','$enderecoE','$bairroE','$cidadeE','$estadoE','$cepE','$foneE','$nomeE','$emailE')");
 
 $empresaqy = mysqli_query($conexao,"select max(COD) from cad_empresa");
 $empresaArray = mysqli_fetch_assoc($empresaqy);

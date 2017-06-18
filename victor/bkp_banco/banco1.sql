@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.2
--- http://www.phpmyadmin.net
+-- version 4.6.4deb1
+-- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: 28-Mar-2017 às 22:28
--- Versão do servidor: 10.1.19-MariaDB
--- PHP Version: 5.6.28
+-- Host: localhost:3306
+-- Generation Time: 18-Jun-2017 às 14:07
+-- Versão do servidor: 5.7.15-1
+-- PHP Version: 5.6.26-1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -32,6 +32,7 @@ CREATE TABLE `cad_empresa` (
   `R_SOCIAL` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `CNPJ` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `ENDERECO` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `NUMERO` int(11) NOT NULL,
   `BAIRRO` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `CIDADE` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `ESTADO` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
@@ -45,8 +46,9 @@ CREATE TABLE `cad_empresa` (
 -- Extraindo dados da tabela `cad_empresa`
 --
 
-INSERT INTO `cad_empresa` (`COD`, `TIPO`, `R_SOCIAL`, `CNPJ`, `ENDERECO`, `BAIRRO`, `CIDADE`, `ESTADO`, `CEP`, `FONE`, `RESP_LEGAL`, `EMAIL_RESP_LEGAL`) VALUES
-(1, 1, 'razão', '12.345.678/9123-45', 'rua ççç', 'ááá', 'êêê', 'RJ', '12.345-678', '(12) 3456-7891', 'eu', 'ivctor@');
+INSERT INTO `cad_empresa` (`COD`, `TIPO`, `R_SOCIAL`, `CNPJ`, `ENDERECO`, `NUMERO`, `BAIRRO`, `CIDADE`, `ESTADO`, `CEP`, `FONE`, `RESP_LEGAL`, `EMAIL_RESP_LEGAL`) VALUES
+(1, 1, 'razão', '12.345.678/9123-45', 'rua ççç', 0, 'ááá', 'êêê', 'RJ', '12.345-678', '(12) 3456-7891', 'eu', 'ivctor@'),
+(6, 2, 'asd', '44.444.444/4444-44', 'kj', 54, 'ad', 'sd', 'RS', '44.444-444', '(55) 5555-5555', NULL, 'victordesouzaabreu@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -90,22 +92,24 @@ CREATE TABLE `login` (
   `USER` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `SENHA` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `COD_EMPRESA` int(255) DEFAULT NULL,
-  `EMAIL` varchar(255) CHARACTER SET utf8 NOT NULL DEFAULT '',
+  `EMAIL` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `FONE` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `ENDERECO` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `NUMERO` int(11) NOT NULL,
   `BAIRRO` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `CIDADE` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `ESTADO` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `CEP` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `NOME` varchar(255) CHARACTER SET utf8 NOT NULL
+  `NOME` varchar(255) CHARACTER SET utf8 DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Extraindo dados da tabela `login`
 --
 
-INSERT INTO `login` (`ID`, `USER`, `SENHA`, `COD_EMPRESA`, `EMAIL`, `FONE`, `ENDERECO`, `BAIRRO`, `CIDADE`, `ESTADO`, `CEP`, `NOME`) VALUES
-(1, 'admin', 'admin', 1, 'czvdsvsdv', '(12) 3456-7891', 'xzcsc', 'zxc', 'dvzxvx', 'RS', '12.345-678', 'sdavdc');
+INSERT INTO `login` (`ID`, `USER`, `SENHA`, `COD_EMPRESA`, `EMAIL`, `FONE`, `ENDERECO`, `NUMERO`, `BAIRRO`, `CIDADE`, `ESTADO`, `CEP`, `NOME`) VALUES
+(1, 'admin', 'admin', 1, 'czvdsvsdv', '(12) 3456-7891', 'xzcsc', 0, 'zxc', 'dvzxvx', 'RS', '12.345-678', 'sdavdc'),
+(3, 'victordesouzaabreu@gmail.com', 'admin', 6, '', '(55) 5555-5555', 'sd', 56, 'sd', 'sd', 'RS', '55.555-555', NULL);
 
 --
 -- Indexes for dumped tables
@@ -137,7 +141,7 @@ ALTER TABLE `login`
 -- AUTO_INCREMENT for table `cad_empresa`
 --
 ALTER TABLE `cad_empresa`
-  MODIFY `COD` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `COD` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `categorias`
 --
@@ -147,7 +151,7 @@ ALTER TABLE `categorias`
 -- AUTO_INCREMENT for table `login`
 --
 ALTER TABLE `login`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

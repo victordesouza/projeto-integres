@@ -3,6 +3,11 @@
 <head lang="en">
 	<title>Login</title>
  	<link rel="stylesheet" href="css/bootstrap.css">
+	<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body style="background-color: #fafafa">
 
@@ -15,7 +20,7 @@ if(array_key_exists("error",$_GET) && $_GET["error"]=="true"){
 ?>
 <div style="margin-left: 30%;margin-right: 30%">
 	<form style="text-align: center;padding: 30px;background-color: #e5e5e5;margin-top: 7%;border-radius: 12px; border: 2px solid #777" method="post" action="verificaLogin.php">
-	
+
 		<img align="center" src="logo.png" width="30%">
 		<br><br>
 		<div class="input-group">
@@ -29,7 +34,7 @@ if(array_key_exists("error",$_GET) && $_GET["error"]=="true"){
     	<br>
     	<a href="cadastro-empresa.php" style="float: left;margin-top: 10px">Criar Novo Registro</a>
 		<input style="margin-left: 40%" class="btn btn-default btn-lg" type="submit" name="submit" value="Entrar">
-	
+
 	</form>
 </div>
 <div style="position: absolute;bottom: 0;margin-left: 70%">

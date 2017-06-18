@@ -1,4 +1,4 @@
-		// SOLICITAÇÃO DE CADASTRO DE EMPRESA SENDO E-COMMERCE OU INDÚSTRIA COM UM RESPONSÁVEL LEGAL PELA UTILIZAÇÃO DO PROGRAMA 
+
 <?php include("ConectaBanco.php");?>
 <!DOCTYPE html>
 <html>
@@ -72,7 +72,7 @@ Estado:<select style="width: 7%;height: 22px" name="estadoCobrancaEmpresa">
 <p>Telefone:<input style="width: 14%" type="text" id="telefone2" name="foneUtilizador"></p>
 <p>Endereço de Cobrança:<input style="width: 30%" type="text" name="endCobrancaUtilizador"></p>
 <p>Bairro:<input style="width: 12%" type="text" name="bairroCobrancaUtilizador">Cidade:<input style="width: 17%" type="text" name="cidadeCobrancaUtilizador">
-Estado:Estado:<select style="width: 7%;height: 22px" name="estadoCobrancaUtilizador">
+Estado:<select style="width: 7%;height: 22px" name="estadoCobrancaUtilizador">
 	<option value="AC">AC</option>
 	<option value="AL">AL</option>
 	<option value="AP">AP</option>

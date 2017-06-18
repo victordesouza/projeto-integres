@@ -1,0 +1,57 @@
+.cadastro {
+	margin: 10px 0 20px;
+	border-bottom: 1px solid #eee;
+	padding-bottom: 9px;
+}
+#logo-principal{
+	width: 100px;
+	height: auto;
+	margin-left: 45%;
+}
+
+.endereco {
+	width: 350px;
+	margin-right: 10px;
+
+}
+
+.end-num {
+width: 100px;
+
+}
+
+.bairro {
+	width: 150px;
+}
+
+.cidade {
+	width: 150px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.estado {
+	width: 150px;
+
+}
+
+.cep{
+	width: 150px;
+}
+
+.ddd{
+	width: 70px;
+}
+.fone{
+	width: 150px;
+	margin-left: 10px;
+}
+
+.menu-cat {
+	text-align: left;
+	margin-bottom: 10px;
+}
+
+.un-med {
+	margin-top: 10px;
+}
