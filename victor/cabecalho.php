@@ -1,4 +1,4 @@
-<?php include("ConectaBanco.php");?>
+<?php require_once("FuncoesBanco.php");?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +7,7 @@
 <body>
 <ul>
 <li><img style="width: 60px;padding-left: 10px;padding-right: 30px" src="logo.png"></li>
-  <?php 
+  <?php
   if (isset($_SESSION['tipo']) && $_SESSION['tipo'] == 1) {?>
   	<li><a href="industriaInicial.php">Home</a></li>
   	<li><a href="addProduto.php">Add Produto</a></li>

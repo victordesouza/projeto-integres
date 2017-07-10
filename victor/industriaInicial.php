@@ -1,5 +1,4 @@
 <?php
-include("ConectaBanco.php");
-include("cabecalho.php");
+require_once("cabecalho.php");
 
 ?>

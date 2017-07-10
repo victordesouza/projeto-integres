@@ -1,5 +1,5 @@
 
-<?php include("ConectaBanco.php");?>
+<?php require_once("FuncoesBanco.php");?>
 <!DOCTYPE html>
 <html>
 <head>

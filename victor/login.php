@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -11,13 +12,14 @@
 </head>
 <body style="background-color: #fafafa">
 
-<?php
-if(array_key_exists("error",$_GET) && $_GET["error"]=="true"){
-?>
-<p class="alert-danger">Usuário ou Senha Incorreto</p><br>
-<?php
-}
-?>
+<?php if(isset($_SESSION['success_login'])){ ?>
+	<p align="center" style="color: white;background-color: #f47c7c;"><?=$_SESSION['success_login'] ?></p><br>
+<?php }?>
+
+<?php if(isset($_SESSION['danger_login'])){ ?>
+	<p align="center" style="color: white;background-color: #f47c7c;"><?=$_SESSION['danger_login'] ?></p><br>
+<?php }?>
+
 <div style="margin-left: 30%;margin-right: 30%">
 	<form style="text-align: center;padding: 30px;background-color: #e5e5e5;margin-top: 7%;border-radius: 12px; border: 2px solid #777" method="post" action="verificaLogin.php">
 
@@ -37,9 +39,9 @@ if(array_key_exists("error",$_GET) && $_GET["error"]=="true"){
 
 	</form>
 </div>
+<!--
 <div style="position: absolute;bottom: 0;margin-left: 70%">
 <span style="color: #111"><strong>*  Navegadores Suportados:</strong><img src="navegadores-suportados.jpg" width="30%"></span>
-
-</div>
+</div>-->
 </body>
 </html>

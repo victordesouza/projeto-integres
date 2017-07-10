@@ -1,61 +1,63 @@
 <?php
-include("ConectaBanco.php");
-					//campos da Empresa
-$tipo = $_POST['tipoCadastro'];
-$rSocial = $_POST['rSocialEmpresa'];
-$cnpj = $_POST['cnpjEmpresa'];
-$emailE = $_POST['emailEmpresa'];
-$foneE = $_POST['foneEmpresa'];
-$enderecoE = $_POST['endCobrancaEmpresa'];
-$bairroE = $_POST['bairroCobrancaEmpresa'];
-$cidadeE = $_POST['cidadeCobrancaEmpresa'];
-$estadoE = $_POST['estadoCobrancaEmpresa'];
-$cepE = $_POST['cepEmpresa'];
-$numE = $_POST['numEndEmpresa'];
-						//campos do usuario
-$user = $_POST['login'];
+require_once("FuncoesBanco.php");
+require_once("class/Empresa.php");
+
+$empresa = new Empresa();
+
+$empresa->login = $_POST['login'];
 $senha = $_POST['senha'];
-$fone = $_POST['foneUtilizador'];
-$endereco = $_POST['endCobrancaUtilizador'];
-$bairro = $_POST['bairroCobrancaUtilizador'];
-$cidade = $_POST['cidadeCobrancaUtilizador'];
-$estado = $_POST['estadoCobrancaUtilizador'];
-$cep = $_POST['cepUtilizador'];
-$num = $_POST['numEndUtilizador'];
+$empresa->senha = md5($senha);
+					//campos da Empresa
+$empresa->tipo = $_POST['tipoCadastro'];
+$empresa->rSocial = $_POST['rSocialEmpresa'];
+$empresa->cnpj = $_POST['cnpjEmpresa'];
+$empresa->emailE = $_POST['emailEmpresa'];
+$empresa->foneE = $_POST['foneEmpresa'];
+$empresa->endE = $_POST['endCobrancaEmpresa'];
+$empresa->bairroE = $_POST['bairroCobrancaEmpresa'];
+$empresa->cidadeE = $_POST['cidadeCobrancaEmpresa'];
+$empresa->estadoE = $_POST['estadoCobrancaEmpresa'];
+$empresa->cepE = $_POST['cepEmpresa'];
+$empresa->numE = $_POST['numEndEmpresa'];
+						//campos do usuario
 
-$mesmoEnd = $_POST['msm-end-cob'];
+$empresa->foneC = $_POST['foneUtilizador'];
+$empresa->endC = $_POST['endCobrancaUtilizador'];
+$empresa->bairroC = $_POST['bairroCobrancaUtilizador'];
+$empresa->cidadeC = $_POST['cidadeCobrancaUtilizador'];
+$empresa->estadoC = $_POST['estadoCobrancaUtilizador'];
+$empresa->cepC = $_POST['cepUtilizador'];
+$empresa->numC = $_POST['numEndUtilizador'];
 
-if ($mesmoEnd == 'on') {
-  $fone = $foneE;
-  $endereco = $enderecoE;
-  $bairro = $bairroE;
-  $cidade = $cidadeE;
-  $estado = $estadoE;
-  $num = $numE;
-  $cep = $cepE;
-}
+$empresa->mesmoEnd = $_POST['msm-end-cob'];
 
-//echo $tipo."<br>".$rSocial."<br>".$cnpj."<br>".$emailE."<br>".$foneE."<br>".$enderecoE."<br>".$bairroE."<br>".$cidadeE."<br>".$estadoE."<br>".$cepE;
+$empresa = $empresa->ValidaMesmoEnd();
 
-if (empty($rSocial) || empty($cnpj) || empty($emailE) || empty($foneE) || empty($enderecoE) ||
-    empty($bairroE) || empty($cidadeE) || empty($estadoE) || empty($cepE) || empty($user) ||
-    empty($senha) || empty($fone) || empty($endereco) || empty($bairro) || empty($cidade) ||
-    empty($estado) || empty($cep) || empty($numE) || empty($num)) {
-	header("Location: cadastro-empresa2.php?error=true");
+#  caso algum dos campos nao tenha sido preenchido
+$empresa->VerificaCamposVazios();
+
+
+if (isset($_SESSION['campo_vazio']) && $_SESSION['campo_vazio'] == "1") {
+  $_SESSION['danger_empresa'] = "* Preencha todos os campos";
+  header("Location: cadastro-empresa.php");
+
 }else{
-
 // salva cadastroda empresa
-mysqli_query($conexao,"insert into cad_empresa (TIPO,R_SOCIAL,CNPJ,ENDERECO,NUMERO,BAIRRO,CIDADE,ESTADO,CEP,FONE,EMAIL_RESP_LEGAL)
-value ('$tipo','$rSocial','$cnpj','$enderecoE','$numE','$bairroE','$cidadeE','$estadoE','$cepE','$foneE','$emailE')");
+Conecta("insert into cad_empresa (TIPO,R_SOCIAL,CNPJ,ENDERECO,NUMERO,BAIRRO,CIDADE,ESTADO,CEP,FONE,EMAIL_RESP_LEGAL)
+value ('$empresa->tipo','$empresa->rSocial','$empresa->cnpj','$empresa->endE','$empresa->numE','$empresa->bairroE',
+'$empresa->cidadeE','$empresa->estadoE','$empresa->cepE','$empresa->foneE','$empresa->emailE')");
 
-$empresaqy = mysqli_query($conexao,"select max(COD) from cad_empresa");
-$empresaArray = mysqli_fetch_assoc($empresaqy);
-$empresa = $empresaArray["max(COD)"];
+$empresaQy = Conecta("select max(COD) from cad_empresa");
+$empresaArray = mysqli_fetch_assoc($empresaQy);
+$codEmp = $empresaArray["max(COD)"];
+$empresa->cod = $codEmp;
 
 // salva informações do utilizador
-mysqli_query($conexao,"insert into login (COD_EMPRESA,USER,SENHA,FONE,ENDERECO,NUMERO,BAIRRO,CIDADE,ESTADO,CEP)
-VALUES ('$empresa','$user','$senha','$fone','$endereco','$num','$bairro','$cidade','$estado','$cep')");
-echo $empresa."<br>".$user."<br>".$senha."<br>".$fone."<br>".$endereco."<br>".$num."<br>".$bairro."<br>".$cidade."<br>".$estado."<br>".$cep;
+
+Conecta("insert into login (COD_EMPRESA,USER,SENHA,FONE,ENDERECO,NUMERO,BAIRRO,CIDADE,ESTADO,CEP)
+VALUES ('$empresa->cod','$empresa->login','$empresa->senha','$empresa->foneC','$empresa->endC','$empresa->numC','$empresa->bairroC','$empresa->cidadeC','$empresa->estadoC','$empresa->cepC')");
+
+$_SESSION['success_login'] = "Empresa cadastrada com sucesso";
 header("Location: login.php");
 }
 ?>

@@ -1,8 +1,5 @@
 <?php 				// CADASTRA PRODUTOS DAS INDÚSTRIAS COM E SEM VARIAÇÃO, SENDO POSSÍVEL UPAR IMAGENS E LINK DE VIDEOS
-include("ConectaBanco.php");
-include("cabecalho.php");
-
-include("categorias.php");?>
+require_once("categorias.php");?>
 
 <div style="margin-left: 5%">
 <br>
@@ -36,11 +33,11 @@ Características:<input style="margin-left: 3%;width: 50%" type="text" id="corpo
 	<option <?php if(isset($_POST['volumes']) && $_POST['volumes'] == '07'){echo "selected";}?>>07</option>
 </select><br>
 
-<?php 
+<?php
 
 if (isset($_POST['volumes'])) {
 	$x=0;
-	for ($i=$_POST['volumes']; $i > 0 ; $i--) { 
+	for ($i=$_POST['volumes']; $i > 0 ; $i--) {
 		$x ++;
 		$largura = '';
 		$altura = '';
@@ -110,21 +107,21 @@ if ((isset($_POST['variacao']) && $_POST['variacao'] == 'Não') || !isset($_POST
 	<label for="imagem1">
 		<img id="img1" src="img/img.png" width="80px" height="80px" name="img1" <?php if(isset($_POST['img1'])){ ;}?> />
 	</label>
-	<input type="file" id="imagem1" accept="image/*" hidden="" name="imagem1" 
+	<input type="file" id="imagem1" accept="image/*" hidden="" name="imagem1"
 	onchange="document.getElementById('img1').src = window.URL.createObjectURL(this.files[0])">
 </div>
 <div class="img">
 	<label for="imagem2">
 		<img id="img2" src="img/img.png" width="80px" height="80px" name="img2"/>
 	</label>
-	<input type="file" id="imagem2" accept="image/*" hidden="" name="imagem2" 
+	<input type="file" id="imagem2" accept="image/*" hidden="" name="imagem2"
 	onchange="document.getElementById('img2').src = window.URL.createObjectURL(this.files[0])">
 </div>
 <div class="img">
 	<label for="imagem3">
 		<img id="img3" src="img/img.png" width="80px" height="80px" name="img3"/>
 	</label>
-	<input type="file" id="imagem3" accept="image/*" hidden="" name="imagem3" 
+	<input type="file" id="imagem3" accept="image/*" hidden="" name="imagem3"
 	onchange="document.getElementById('img3').src = window.URL.createObjectURL(this.files[0])">
 </div>
 
@@ -136,7 +133,7 @@ if ((isset($_POST['variacao']) && $_POST['variacao'] == 'Não') || !isset($_POST
 
 <br><button>Atualizar</button>
 </form>
-<?php 
+<?php
 if (isset($_POST['volumes'])) {
 	$_SESSION['volumes'] = $_POST['volumes'];
 }

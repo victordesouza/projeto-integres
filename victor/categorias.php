@@ -1,5 +1,6 @@
-<?php 
-$resultadoCat = mysqli_query($conexao,"select ID,NOME,NIVEL,PAI from categorias where PAI = '0' ");?>
+<?php
+require_once("cabecalho.php");
+$resultadoCat = Conecta("select ID,NOME,NIVEL,PAI from categorias where PAI = '0'");?>
 
 <h2 style="margin-left: 10%;width: 70%" >Cadastro de Produtos</h2>
 <table style="margin-left: 5%">
@@ -17,7 +18,7 @@ $resultadoCat = mysqli_query($conexao,"select ID,NOME,NIVEL,PAI from categorias 
 <?php
 if (isset($_GET['categorias']) && $_GET['categorias'] != 0) {
 	$cat = $_GET['categorias'];
-	$resultadoSub1 = mysqli_query($conexao,"select ID,NIVEL,NOME,PAI from categorias where PAI = '$cat' ");
+	$resultadoSub1 = Conecta("select ID,NIVEL,NOME,PAI from categorias where PAI = '$cat' ");
 	while ($subCat1 = mysqli_fetch_assoc($resultadoSub1)) {?>
 		<option value="<?=$subCat1['ID'];?>" <?php if(isset($_GET['subCat1']) && $_GET['subCat1']==$subCat1['ID']){echo "selected";}?> ><?=$subCat1['NOME'];?></option>
 	<?php }} ?></select></td></tr>
@@ -27,7 +28,7 @@ if (isset($_GET['categorias']) && $_GET['categorias'] != 0) {
 <?php
 if ((isset($_GET['categorias']) && $_GET['categorias'] != 0) || isset($_GET['subCat1']) && $_GET['subCat1'] != 0) {
 	$subCategoria1 = $_GET['subCat1'];
-	$resultadoSub2 = mysqli_query($conexao,"select ID,PAI,NOME,NIVEL from categorias where PAI = '$subCategoria1' ");
+	$resultadoSub2 = Conecta("select ID,PAI,NOME,NIVEL from categorias where PAI = '$subCategoria1' ");
 	while ($subCat2 = mysqli_fetch_assoc($resultadoSub2)) {?>
 		<option value="<?=$subCat2['ID'];?>" <?php if(isset($_GET['subCat2']) && $_GET['subCat2']==$subCat2['ID']){echo "selected";}?> ><?=$subCat2['NOME'];?></option>
 	<?php }} ?></select></td></tr>

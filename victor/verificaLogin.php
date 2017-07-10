@@ -1,26 +1,28 @@
 <?php
-include("ConectaBanco.php");
+require_once("FuncoesBanco.php");
 $cont= 0;
 $nome = $_POST['nome'];
 
 $password = $_POST['password'];
 $SenhaArray = array();
 
-$nome = mysqli_real_escape_string($conexao, $nome);
+$nome = SqlInjector($nome);  ######   EVITA O SQL INJECTOR NOS INPUTS
 $passMd5 = md5($password);
 
 if ($nome == NULL || $password == NULL){
-	header('Location: login.php?error=true');
-}
-
-$qySenha = mysqli_query($conexao,"select p.SENHA,p.USER,q.TIPO from login p
+	$_SESSION['danger_login'] = "Nome e senha são obrigatórios";
+	header('Location: login.php');
+}else{
+$sql = "select p.SENHA,p.USER,q.TIPO from login p
 				left outer join cad_empresa q on (q.cod = p.COD_EMPRESA)
-				where upper(p.USER) = upper('$nome') and p.SENHA = '$passMd5'");
+				where upper(p.USER) = upper('$nome') and p.SENHA = '$passMd5'";
+$qySenha = Conecta($sql);
 
 $login = mysqli_fetch_assoc($qySenha);
 
 if ($login == NULL) {
-	header('Location: login.php?error=true');
+	$_SESSION['danger_login'] = "Nome ou senha incorreto(s)";
+	header('Location: login.php');
 }else{
 	if ($login["TIPO"] == 1) {
 		header('Location: industriaInicial.php',TRUE,307);
@@ -29,6 +31,7 @@ if ($login == NULL) {
 		header('Location: comercioInicial.php',TRUE,307);
 		$_SESSION['tipo'] = 2;
 	}
+}
 }
 
 include("rodape.php");

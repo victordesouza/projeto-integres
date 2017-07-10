@@ -1,4 +1,4 @@
-<?php include("ConectaBanco.php");?>
+<?php require_once("FuncoesBanco.php");?>
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
@@ -21,20 +21,20 @@
   	</script>
   </head>
   <body>
-    <?php if(array_key_exists("error",$_GET) && $_GET["error"]=="true"){ ?>
-    	<p align="center" style="color: white;background-color: #f47c7c;">Todos os Campos Precisam ser Preenchidos</p><br>
+    <?php if(isset($_SESSION['danger_empresa'])){ ?>
+    	<p align="center" style="color: white;background-color: #f47c7c;"><?=$_SESSION['danger_empresa'] ?></p><br>
     <?php }?>
     <div class="container">
 
     <div class="cadastro">
         <navbar-brand> <img src="logo.png"/ id="logo-principal"></navbar-brand>
     </div>
-<form action="verificaCadastro2.php" method="post" id="salvar">
+<form action="verificaCadastro.php" method="post" id="salvar">
 <div class="col-sm-6">
   <div class="form-group">
       <select name="tipoCadastro" required class="selectpicker btn btn-default dropdown-toggle">
           <option value="" disabled selected hidden>Tipo:</option>
-          <option value="1">Indústria/Distribuidor)</option>
+          <option value="1">Indústria/Distribuidor</option>
           <option value="2">E-commerce</option>
       </select>
   </div>
