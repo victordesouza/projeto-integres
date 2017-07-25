@@ -32,7 +32,7 @@
 <form action="verificaCadastro.php" method="post" id="salvar">
 <div class="col-sm-6">
   <div class="form-group">
-      <select name="tipoCadastro" required class="selectpicker btn btn-default dropdown-toggle">
+      <select name="tipoCadastro" required class="selectpicker form-control dropdown-toggle">
           <option value="" disabled selected hidden>Tipo:</option>
           <option value="1">Indústria/Distribuidor</option>
           <option value="2">E-commerce</option>
@@ -41,16 +41,17 @@
 
   <div class="form-group">
     <input name="rSocialEmpresa" type="text" class="form-control" id="razao" placeholder="Razão Social">
-  </div>
-
-  <div class="form-group" >
     <input name="cnpjEmpresa" type="text" placeholder="CNPJ" class="form-control" id="cnpj">
   </div>
 
+  <!-- <div class="form-group" >
+    <input name="cnpjEmpresa" type="text" placeholder="CNPJ" class="form-control" id="cnpj">
+  </div> -->
+
   <span> <h4> Endereço Correspondência </h4></span>
-    <div class="form-group">
+    <!-- <div class="form-group">
         <input type="text" name="cepEmpresa" class="form-control cep" id="cep1" placeholder="Cep">
-    </div>
+    </div> -->
     <div class="form-group">
         <input type="text" name="endCobrancaEmpresa" class="form-control col-sm-4 endereco" id="end-cor" placeholder="Endereço Corresp.">
         <input type="number" class="form-control end-num" name="numEndEmpresa" placeholder="número">
@@ -94,10 +95,11 @@
     </div>
 
     <div class="form-group">
-        <input type="text" id="telefone1" name="foneEmpresa" class="form-control col-sm-4" placeholder="Telefone">
+        <input type="text" name="cepEmpresa" class="form-control cep" id="cep1" placeholder="Cep">
+        <input type="text" id="telefone1" name="foneEmpresa" class="form-control" placeholder="Telefone">
     </div>
     <div class="form-group">
-        <input type="text" name="emailEmpresa" style="margin-top:15px;width:100%;height:34px;padding: 6px 12px;border: 1px solid #ccc;border-radius: 4px;" placeholder="E-mail Responsável Legal">
+        <input type="email" name="emailEmpresa" class="form-control" style="width:85%" placeholder="E-mail Responsável Legal">
     </div>
 </div>
 <div class="col-sm-6">
@@ -105,9 +107,9 @@
   <div class="radio">
 
     <input type="checkbox" name="msm-end-cob" style="margin-botton:15px"> Mesmo de correspondência
-    <div class="form-group">
+    <!-- <div class="form-group">
         <input type="text" class="form-control cep" name="cepUtilizador" id="cep2" placeholder="Cep">
-    </div>
+    </div> -->
     <div class="form-group">
         <input type="text" class="form-control col-sm-4 endereco" name="endCobrancaUtilizador" id="end-cob" placeholder="Endereço Corresp.">
         <input type="number" class="form-control end-num" name="numEndUtilizador" placeholder="número">
@@ -151,22 +153,24 @@
     </div>
 
     <div class="form-group">
-        <input type="text" id="telefone2" name="foneUtilizador" class="form-control col-sm-4" placeholder="Telefone">
+        <input type="text" class="form-control cep" name="cepUtilizador" id="cep2" placeholder="Cep">
+        <input type="text" id="telefone2" name="foneUtilizador" class="form-control" placeholder="Telefone">
     </div>
   </div>
 </div>
 <div class="col-sm-6">
   <span><h4>Login </h4></span>
     <div class="form-group">
-        <input type="email" class="form-control" name="login" placeholder="E-mail Login">
+        <input type="email" class="form-control" style="width:65%" name="login" placeholder="E-mail Login">
     </div>
     <div class="form-group">
-        <input type="password" class="form-control" name="senha" id="pass-log" placeholder="Senha">
+        <input type="password" class="form-control" style="width:65%" name="senha" id="pass-log" placeholder="Senha">
     </div>
 
     <div class="form-group">
-      <button class="btn btn-default" type="button" onclick="window.location.href=''">LIMPAR</button>
-      <button class="btn btn-info" style="margin-left: 40px" type="submit" form="salvar">SALVAR</button>
+      <button class="btn btn-default" type="button" onclick="window.location.href='index.php'">Voltar</button>
+      <button class="btn btn-warning" style="margin-left: 40px" type="button" onclick="window.location.href=''">LIMPAR</button>
+      <button class="btn btn-info" style="margin-left: 45%" type="submit" form="salvar">SALVAR</button>
     </div>
 </div>
 </form>

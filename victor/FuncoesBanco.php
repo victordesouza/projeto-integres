@@ -26,4 +26,11 @@ function SqlInjector($string){
   return mysqli_real_escape_string($conexao, $string);
 }
 
+# Verifica se o usuário está logado, se não estiver redireciona para o index.php
+function logado(){
+  if (!isset($_SESSION['logado'])) {
+    header("Location: index.php");
+  }
+}
+
 ?>

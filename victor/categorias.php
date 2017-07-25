@@ -1,36 +1,68 @@
 <?php
 require_once("cabecalho.php");
-$resultadoCat = Conecta("select ID,NOME,NIVEL,PAI from categorias where PAI = '0'");?>
+require_once("class/Categoria.php");
 
-<h2 style="margin-left: 10%;width: 70%" >Cadastro de Produtos</h2>
-<table style="margin-left: 5%">
-<tr>
-<form action="" style="margin-left: 15%">
-<td>Categoria:  </td><td><select style="margin-left: 30%" id="mod" onchange="this.form.submit()" name="categorias">
-<option value="0">Selecionar ...</option>
-<?php while ($categorias = mysqli_fetch_assoc($resultadoCat)) { ?>
-<option value="<?=$categorias['ID'];?>" <?php if(isset($_GET['categorias']) && $_GET['categorias']==$categorias['ID']){echo "selected";}?>><?=$categorias['NOME'];?></option>
-<?php }?>
-</select></td></tr>
-<tr>
-<td>Sub-Categoria-Primária:  </td><td><select style="margin-left: 30%" id="mod" onchange="this.form.submit()" name="subCat1">
-<option value="0">Selecionar ...</option>
-<?php
-if (isset($_GET['categorias']) && $_GET['categorias'] != 0) {
-	$cat = $_GET['categorias'];
-	$resultadoSub1 = Conecta("select ID,NIVEL,NOME,PAI from categorias where PAI = '$cat' ");
-	while ($subCat1 = mysqli_fetch_assoc($resultadoSub1)) {?>
-		<option value="<?=$subCat1['ID'];?>" <?php if(isset($_GET['subCat1']) && $_GET['subCat1']==$subCat1['ID']){echo "selected";}?> ><?=$subCat1['NOME'];?></option>
-	<?php }} ?></select></td></tr>
-<tr>
-<td>Sub-Categoria-Secundária:  </td><td><select style="margin-left: 30%" id="mod" onchange="this.form.submit()" name="subCat2">
-<option value="0">Selecionar ...</option>
-<?php
-if ((isset($_GET['categorias']) && $_GET['categorias'] != 0) || isset($_GET['subCat1']) && $_GET['subCat1'] != 0) {
-	$subCategoria1 = $_GET['subCat1'];
-	$resultadoSub2 = Conecta("select ID,PAI,NOME,NIVEL from categorias where PAI = '$subCategoria1' ");
-	while ($subCat2 = mysqli_fetch_assoc($resultadoSub2)) {?>
-		<option value="<?=$subCat2['ID'];?>" <?php if(isset($_GET['subCat2']) && $_GET['subCat2']==$subCat2['ID']){echo "selected";}?> ><?=$subCat2['NOME'];?></option>
-	<?php }} ?></select></td></tr>
-</form>
-</table>
+$categoria = new Categoria();
+
+?>
+<!-- <label for="cat">Selecione a Categoria:</label><br> -->
+<span><h4>Selecione a Categoria:</h4></span>
+<select name="cat" id="cat" class="form-control">
+  <option value="0" hidden="">Categoria</option>
+  <?php
+    $resultado_cat = $categoria->listaCategoria();
+    while($linha = mysqli_fetch_assoc($resultado_cat) ) {
+      echo '<option value="'.$linha['ID'].'">'.$linha['NOME'].'</option>';
+    }
+  ?>
+</select>
+
+<select name="sub_cat1" id="sub_cat1" class="form-control">
+  <option value="0" hidden="">Subcategoria 1</option>
+</select>
+
+<span style="display:none">Aguarde, carregando...</span>
+
+<select name="sub_cat2" id="sub_cat2" class="form-control">
+  <option value="0" hidden="">Subcategoria 2</option>
+</select>
+
+<script type="text/javascript">
+$(function(){ // Sub categoria 1
+  $('#cat').change(function(){
+    if( $(this).val() ) {
+      $('#sub_cat1').hide();
+      $('.carregando').show();
+      $.getJSON('sub_cat1.php?search=',{cat: $(this).val(), ajax: 'true'}, function(j){
+        var options = '<option value="0" hidden="">Subcategoria1</option>';
+        for (var i = 0; i < j.length; i++) {
+          options += '<option value="' + j[i].id + '">' + j[i].nome_sub_categoria + '</option>';
+        }
+        $('#sub_cat1').html(options).show();
+        $('.carregando').hide();
+      });
+    } else {
+      $('#sub_cat1').html('<option value="0" hidden="">Subcategoria 1</option>');
+    }
+  });
+});
+
+$(function(){		// Sub categoria 2
+  $('#sub_cat1').change(function(){
+    if( $(this).val() ) {
+      $('#sub_cat2').hide();
+      $('.carregando').show();
+      $.getJSON('sub_cat2.php?search=',{sub_cat1: $(this).val(), ajax: 'true'}, function(j){
+        var options = '<option value="0" hidden="">Subcategoria2</option>';
+        for (var i = 0; i < j.length; i++) {
+          options += '<option value="' + j[i].id + '">' + j[i].nome_sub_categoria + '</option>';
+        }
+        $('#sub_cat2').html(options).show();
+        $('.carregando').hide();
+      });
+    } else {
+      $('#sub_cat2').html('<option value="0" hidden="">Subcategoria 2</option>');
+    }
+  });
+});
+</script>

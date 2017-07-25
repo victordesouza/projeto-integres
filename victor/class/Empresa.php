@@ -1,5 +1,6 @@
 <?php
 require_once("FuncoesBanco.php");
+
 class Empresa {
 
   public $cod;
@@ -48,6 +49,24 @@ public function VerificaCamposVazios(){
       empty($this->estadoC) || empty($this->cepC) || empty($this->numE) || empty($this->numC)) {
         $_SESSION['campo_vazio'] = "1";
   }
+}
+
+public function salvaCadEmpresa(){
+  // salva cadastro da empresa
+  Conecta("insert into cad_empresa (TIPO,R_SOCIAL,CNPJ,ENDERECO,NUMERO,BAIRRO,CIDADE,ESTADO,CEP,FONE,EMAIL_RESP_LEGAL)
+  value ('$this->tipo','$this->rSocial','$this->cnpj','$this->endE','$this->numE','$this->bairroE',
+  '$this->cidadeE','$this->estadoE','$this->cepE','$this->foneE','$this->emailE')");
+}
+
+public function salvaLogin(){    // salva informações do login e endereço de cobrança
+  $resultado = Conecta("select max(COD) from cad_empresa");
+  $linha = mysqli_fetch_assoc($resultado);
+  $this->cod = $linha["max(COD)"];
+
+  Conecta("insert into login (COD_EMPRESA,USER,SENHA,FONE,ENDERECO,NUMERO,BAIRRO,CIDADE,ESTADO,CEP)
+  VALUES ('$this->cod','$this->login','$this->senha','$this->foneC',
+      '$this->endC','$this->numC','$this->bairroC','$this->cidadeC',
+      '$this->estadoC','$this->cepC')");
 }
 
 }

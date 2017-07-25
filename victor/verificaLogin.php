@@ -6,7 +6,7 @@ $nome = $_POST['nome'];
 $password = $_POST['password'];
 $SenhaArray = array();
 
-$nome = SqlInjector($nome);  ######   EVITA O SQL INJECTOR NOS INPUTS
+$nome = SqlInjector($nome);  ######   EVITA O SQL INJECTOR NOS INPUTS com real_scape_string
 $passMd5 = md5($password);
 
 if ($nome == NULL || $password == NULL){
@@ -24,6 +24,7 @@ if ($login == NULL) {
 	$_SESSION['danger_login'] = "Nome ou senha incorreto(s)";
 	header('Location: login.php');
 }else{
+	$_SESSION['logado'] = "logado";
 	if ($login["TIPO"] == 1) {
 		header('Location: industriaInicial.php',TRUE,307);
 		$_SESSION['tipo'] = 1;

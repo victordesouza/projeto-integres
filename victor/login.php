@@ -13,7 +13,7 @@
 <body style="background-color: #fafafa">
 
 <?php if(isset($_SESSION['success_login'])){ ?>
-	<p align="center" style="color: white;background-color: #f47c7c;"><?=$_SESSION['success_login'] ?></p><br>
+	<p align="center" style="color: white;background-color: #6bd674;"><?=$_SESSION['success_login'] ?></p><br>
 <?php }?>
 
 <?php if(isset($_SESSION['danger_login'])){ ?>
