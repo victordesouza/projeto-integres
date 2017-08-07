@@ -1,13 +1,13 @@
 <?php
 require_once("cabecalho.php");
 require_once("class/Categoria.php");
-
 $categoria = new Categoria();
 
 ?>
+<link rel="stylesheet" type="text/css" href="css/cad_produto.css">
 <!-- <label for="cat">Selecione a Categoria:</label><br> -->
 <span><h4>Selecione a Categoria:</h4></span>
-<select name="cat" id="cat" class="form-control">
+<select name="cat" id="cat" class="form-control cat">
   <option value="0" hidden="">Categoria</option>
   <?php
     $resultado_cat = $categoria->listaCategoria();
@@ -17,13 +17,13 @@ $categoria = new Categoria();
   ?>
 </select>
 
-<select name="sub_cat1" id="sub_cat1" class="form-control">
+<select name="sub_cat1" id="sub_cat1" class="form-control cat">
   <option value="0" hidden="">Subcategoria 1</option>
 </select>
 
 <span style="display:none">Aguarde, carregando...</span>
 
-<select name="sub_cat2" id="sub_cat2" class="form-control">
+<select name="sub_cat2" id="sub_cat2" class="form-control cat">
   <option value="0" hidden="">Subcategoria 2</option>
 </select>
 

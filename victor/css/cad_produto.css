@@ -1,0 +1,9 @@
+.cat {
+  width: auto;
+  display: inline;
+}
+
+.metade {
+  width: 40%;
+  display: inline;
+}

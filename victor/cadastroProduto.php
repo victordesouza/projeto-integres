@@ -15,16 +15,17 @@
     </div>
 
     <div class="form-group">
-        <input type="text" name="ncm" class="form-control" id="cep1" style="margin-left:5px" placeholder="NCM">
-        <input type="text" name="ean" class="form-control" placeholder="EAN">
+        <input type="text" name="ncm" class="form-control metade" id="cep1" style="margin-left:5px" placeholder="NCM">
+        <input type="text" name="ean" class="form-control metade" placeholder="EAN">
     </div>
     <div class="form-group">
         <input type="text" name="composicao" style="width:90%" class="form-control" placeholder="Composição">
     </div>
 
+
     <div class="form-group">
       <label for="unMedida" style="margin-left:50px">Unidade de Medida:</label>
-      <select class="form-control" name="unMedida">
+      <select class="form-control cat" name="unMedida">
         <option value="">mm / Gr</option>
         <option value="">mm / Kg</option>
         <option value="">cm / Gr</option>
@@ -71,7 +72,6 @@ function mostraVariacao(){
     </div>
 
   </div>
-
 
   </div>
 </div>
